@@ -44,3 +44,54 @@ To use the visibility settings, you can select the desired levels of visibility 
 The plugin can also be used in combination with other visibility plugins, such as for menu item visibility, with something like the following as the visibility criterion:
 
     ((is_user_logged_in()) && (WPRavenAuth\Ibis::isMemberOfCollege(WPRavenAuth\Ibis::getPerson(wp_get_current_user()->user_login), 'EDMUND')))
+
+Configuring OpenID Connect Generic for Azure
+============================================
+
+UIS has removed their documentation on how to configure OpenID Connect Generic after some errors were flagged. Below are the values needed in order to have the plugin working for University of Cambridge hosted sites, and with support for WPRavenThor.
+
+Login Button Text: `Login with Raven`
+
+Client ID: `<from Blue AD Toolkit>`
+
+Client Secret Key: `<from Blue AD Toolkit>`
+
+OpenID Scope: `openid email profile`
+
+Login Endpoint URL: `https://login.microsoftonline.com/<Tenancy ID>/oauth2/
+v2.0/authorize`
+
+Userinfo Endpoint URL: `https://graph.microsoft.com/oidc/userinfo`
+
+Token Validation Endpoint URL: `https://login.microsoftonline.com/<Tenancy 
+ID>/oauth2/v2.0/token`
+
+End Session Endpoint URL: `https://login.microsoftonline.com/<Tenancy ID>/
+oauth2/v2.0/logout`
+
+JWKS URI: `https://login.microsoftonline.com/<Tenancy ID>/discovery/v2.0/
+keys`
+
+Issuer: `https://login.microsoftonline.com/<Tenancy ID>/v2.0`
+
+JWKS Cache TTL (seconds): `3600`
+
+Identity Key: `email`
+
+Nickname Key: `name`
+
+Email Formatting: `{email}`
+
+Display Name Formatting: `{given_name} {family_name}`
+
+Identify with User Name: `{False}`
+
+Link Existing Users: `{True}`
+
+Create User If Does Not Exist: `{True}`
+
+Redirect Back to Origin Page: `{True}`
+
+Redirect to the login screen when session is expired: `{True}`
+
+`<Tenancy ID>` can be found in Toolkit as well, and is the same across the UIS estate. To help you identify it, it begins `4`.
